@@ -25,7 +25,7 @@ if islinux then
 end
 
 package.cpath = (
-  iswindows and 'bin/?.dll;bin/clibs/?.dll;' or
+  iswindows and ('bin/windows/%s/?.dll;bin/windows/%s/clibs/?.dll;'):format(arch,arch) or
   islinux and ('bin/linux/%s/lib?.so;bin/linux/%s/clibs/?.so;'):format(arch,arch) or
   --[[isosx]] 'bin/lib?.dylib;bin/clibs/?.dylib;')
     .. package.cpath
