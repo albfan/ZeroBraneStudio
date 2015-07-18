@@ -27,9 +27,10 @@ You can see the **domain name** to connect to in the Output window when you star
 
 You can use a simple script to set `LUA_PATH` and `LUA_CPATH` environmental variables to reference `mobdebug` and `luasocket` files that come with ZeroBrane Studio:
 
-    set ZBS=D:\path\to\ZeroBraneStudio
+    set ZBS=C:/path/to/ZeroBraneStudio
     set LUA_PATH=./?.lua;%ZBS%/lualibs/?/?.lua;%ZBS%/lualibs/?.lua
-    set LUA_CPATH=%ZBS%/bin/?.dll;%ZBS%/bin/clibs/?.dll
+    set LUA_CPATH=%ZBS%/bin/windows/x86/?.dll;%ZBS%/bin/windows/x86/clibs/?.dll
+    -- set LUA_CPATH=%ZBS%/bin/windows/x86/?.dll;%ZBS%/bin/windows/x64/clibs/?.dll
     myapplication
 
 If you are running this on Linux, make sure you use the same path separator (`;`)
@@ -44,7 +45,11 @@ and reference proper location depending on your Linux architecture (replace `x86
 
 In a similar way, instead of specifying `LUA_PATH` and `LUA_CPATH`, you can set `package.path` and `package.cpath` (if needed) directly from your script:
 
-    package.path = package.path .. ";/opt/zbstudio/lualibs/mobdebug/?.lua"
+    local zbs = "C:/path/to/ZeroBraneStudio"
+    -- local zbs = "/opt/zbstudio"
+    package.path = package.path .. ";./?.lua;" .. zbs .. "/lualibs/?/?.lua;" .. zbs .. "/lualibs/?.lua"
+    package.cpath = package.cpath .. ";" .. zbs .. "/bin/linux/x86/?.so;" .. zbs .."/bin/linux/x86/clibs/?.so"
+    -- package.cpath = package.cpath .. ";" .. zbs .. "/bin/windows/x86/?.dll;" .. zbs .."/bin/windows/x86/clibs/?.dll"
 
 ## Examples
 
